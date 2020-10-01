@@ -1,0 +1,65 @@
+/*package whatever //do not write package name here */
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class GFG {
+    public static ArrayList<Integer> solve(int[] m,int n,int s){
+        ArrayList<Integer> al=new ArrayList<>();
+        int first = 0;
+        int last = 0;
+
+        long result = m[first];
+
+        while (result != s) {
+            if (result > s) {
+                if (first == last) {
+                    last++;
+                    first++;
+                    if (last >= n) break;
+                    result = m[first];
+                } else {
+                    result -= m[first];
+                    first++;
+                }
+            } else {
+                last++;
+                if (last < n) {
+                    result += m[last];
+                } else {
+                    break;
+                }
+            }
+        }
+        if(result!=s)
+        al.add(-1);
+        else{
+            al.add(first+1);
+            al.add(last+1);
+        }
+        return al;
+    }
+	public static void main (String[] args) {
+		Scanner sc=new Scanner(System.in);
+		int t=sc.nextInt();
+		while(t-->0){
+		    int n=sc.nextInt();
+		    int s=sc.nextInt();
+		    int a[]=new int[n];
+		    for(int i=0;i<n;i++)
+		    a[i]=sc.nextInt();
+		    ArrayList<Integer> x=solve(a,n,s);
+		    for(int i=0;i<x.size();i++){
+		        System.out.print(x.get(i)+" ");
+		    }
+		    System.out.println();
+		}
+		
+	}
+}
+
+
+
+
+
